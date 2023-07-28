@@ -1,0 +1,131 @@
+<div>
+  <h3>Movie form</h3>
+  <hr/>
+  <form [formGroup]="form" (ngSubmit)="addMovie()">
+    <div class="form-group">
+      <label
+        for="title"
+        class="form-control-label"
+      >
+        Title:
+      </label>
+      <input
+        type="text"
+        id="title"
+        formControlName="title"
+        name="title"
+        placeholder="Movie title"
+        class="form-control"
+      >
+      <small>
+        Please enter a title
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label
+        for="director"
+        class="form-control-label"
+      >
+        Director:
+      </label>
+      <input
+        type="text"
+        id="director"
+        formControlName="director"
+        name="director"
+        placeholder="Director name"
+        class="form-control"
+      >
+      <small>
+        Please enter a director name
+      </small>
+
+    </div>
+
+    <div class="form-group">
+      <label
+        for="releaseDate"
+        class="form-control-label"
+      >
+        Year:
+      </label>
+      <input
+        type="number"
+        id="releaseDate"
+        formControlName="releaseDate"
+        name="releaseDate"
+        placeholder="Year of release"
+        class="form-control"
+      >
+      <small>
+        Please enter a year
+      </small>
+
+    </div>
+
+    <div class="form-group mt-2">
+      <label
+        for="genres"
+        class="form-control-label"
+      >
+        Genres:
+      </label>
+      <select
+        multiple
+        size = 7;
+        id="genres"
+        formControlName="genres"
+        name="genres"
+        class="form-control genre-select"
+      >
+        <option value=null disabled> Please choose maximum three genres </option>
+        <option *ngFor="let genre of genres" value="{{genre.name}}">{{genre.displayName}}</option>
+      </select>
+      <small>
+        Please choose a maximum of three genres
+      </small>
+    </div>
+
+    <div class="form-group mt-2">
+            <span class="form-control-label">
+                Rating:
+            </span>
+      <br>
+      <div>
+        <label *ngFor="let rating of ratings" class="label">
+          <input type="radio" formControlName="ratings" name="ratings" [value]="rating.name"/>
+          {{rating.displayName}}
+        </label>
+      </div>
+
+    </div>
+
+    <div class="form-group mt-2">
+      <label
+        for="imageUrl"
+        class="form-control-label"
+        [ngClass]="{'text-danger': form.get('imageUrl')?.invalid && form.get('imageUrl')?.touched}"
+      >
+        Poster URL:
+      </label>
+      <input
+        type="text"
+        id="imageUrl"
+        formControlName="imageUrl"
+        name="imageUrl"
+        placeholder="Year of release"
+        class="form-control"
+        [ngClass]="{'is-invalid': form.get('imageUrl')?.invalid && form.get('imageUrl')?.touched}"
+      >
+      <small
+        *ngIf="form.get('imageUrl')?.invalid && form.get('imageUrl')?.touched"
+        class="text-danger"
+      >
+        Please enter a poster image url
+      </small>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-2">Submit</button>
+  </form>
+</div>

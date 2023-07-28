@@ -1,0 +1,26 @@
+<h1>Movie List</h1>
+
+<div class="spinner-border" role="status" *ngIf="isFetching">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<table class="table" *ngIf="!isFetching">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Movie name</th>
+    <th scope="col">Director</th>
+    <th scope="col">Release year</th>
+    <th scope="col">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let movie of movies">
+    <td>{{movie.id}}</td>
+    <td>{{movie.title}}</td>
+    <td>{{movie.director}}</td>
+    <td>{{movie.releaseDate}}</td>
+    <button (click)="deleteMovie(movie.id)" class="me-1">Delete</button>
+    <button (click)="goToMovieDetails(movie.id)">Details</button>
+  </tr>
+  </tbody>
+</table>
